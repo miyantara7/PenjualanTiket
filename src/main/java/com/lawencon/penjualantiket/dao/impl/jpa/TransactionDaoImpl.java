@@ -1,4 +1,5 @@
 package com.lawencon.penjualantiket.dao.impl.jpa;
+
 import java.math.BigInteger;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import com.lawencon.penjualantiket.model.Customer;
 import com.lawencon.penjualantiket.model.HargaTiket;
 import com.lawencon.penjualantiket.model.TransactionDetail;
 import com.lawencon.penjualantiket.model.TransactionHeader;
+import com.lawencon.penjualantiket.model.Type;
 import com.lawencon.penjualantiket.model.VoucherTiket;
 
 @Repository("transaction_repo_jpa")
@@ -19,7 +21,10 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Autowired
 	private TransactionDetailRepo td_repo;
-	
+
+	@Autowired
+	private TypeRepo ty_repo;
+
 	@Override
 	public TransactionHeader findTransactionId() throws Exception {
 		return th_repo.findByTransactionId();
@@ -29,7 +34,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	public int findMaxTransactionId() throws Exception {
 		return th_repo.findByMaxTransactionId();
 	}
-	
+
 	@Override
 	public TransactionHeader insertHeader(TransactionHeader tHeader) throws Exception {
 		return th_repo.save(tHeader);
@@ -39,14 +44,14 @@ public class TransactionDaoImpl implements TransactionDao {
 	public List<TransactionDetail> viewAllTransactionId(int tId) throws Exception {
 		return th_repo.findByIdtransaction(tId);
 	}
-	
+
 	@Override
 	public TransactionDetail insertTiket(TransactionDetail tDetail) throws Exception {
 		return td_repo.save(tDetail);
 	}
 
 	@Override
-	public Customer findByUsername(String user , String pass) throws Exception {
+	public Customer findByUsername(String user, String pass) throws Exception {
 		return td_repo.findByUsername(user, pass);
 	}
 
@@ -65,8 +70,8 @@ public class TransactionDaoImpl implements TransactionDao {
 		return th_repo.findByTotalPembelian(thId);
 	}
 
-
-
-
-
+	@Override
+	public List<TransactionDetail> viewTransaksi() throws Exception {
+		return td_repo.findAll();
+	}
 }

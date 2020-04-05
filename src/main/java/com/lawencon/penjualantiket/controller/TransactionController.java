@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -59,6 +60,31 @@ public class TransactionController extends BaseController {
 			return new ResponseEntity<>(listTransaction, HttpStatus.BAD_REQUEST);
 		}
 
+	}
+	
+	@GetMapping("/viewtransaksi")
+	public ResponseEntity<?> getTransactionHiber(@RequestHeader("Authorization") String user){
+		List<TransactionDetail> listTransaction = new ArrayList<>();
+		try {
+			String [] auth = authUser(user).split(":");
+			listTransaction = t_service.viewTransaksiHiber(auth[0],auth[1]);
+			return new ResponseEntity<>(listTransaction, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(listTransaction, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/viewtransaksi/jpa")
+	public ResponseEntity<?> getTransactionJpa(@RequestHeader("Authorization") String user){
+		List<TransactionDetail> listTransaction = new ArrayList<>();
+		try {
+			String [] auth = authUser(user).split(":");
+			listTransaction = t_service.viewTransaksiJpa(auth[0],auth[1]);
+			return new ResponseEntity<>(listTransaction, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(listTransaction, HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

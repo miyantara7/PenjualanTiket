@@ -78,4 +78,11 @@ public class TransactionDaoImpl extends BaseHibernate implements TransactionDao 
 		return (BigInteger) q.getSingleResult();
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TransactionDetail> viewTransaksi() throws Exception {
+		Query q = em.createQuery("select th.transactionId as id, td.nama, td.seatNumber, td.tglKeberangakatan, tk.jenisKendaraan, tht.harga, th.totalPembelian, tv.harga from TransactionDetail td join td.transactionHeader th join td.typeKendaraan tk join td.hargaTiket tht join th.voucherTiket tv");
+		return q.getResultList();
+	}
+
 }

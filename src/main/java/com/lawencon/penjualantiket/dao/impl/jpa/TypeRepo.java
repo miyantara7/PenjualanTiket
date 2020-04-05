@@ -11,4 +11,6 @@ import com.lawencon.penjualantiket.model.Type;
 public interface TypeRepo extends JpaRepository<Type, Integer> {
 	@Query("from Type where kodeType = :kodeParam")
 	abstract Type findByKodeType(@Param("kodeParam") String kode) throws Exception;
+	
+	
 }

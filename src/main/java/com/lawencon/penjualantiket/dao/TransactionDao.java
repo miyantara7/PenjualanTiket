@@ -6,6 +6,7 @@ import com.lawencon.penjualantiket.model.Customer;
 import com.lawencon.penjualantiket.model.HargaTiket;
 import com.lawencon.penjualantiket.model.TransactionDetail;
 import com.lawencon.penjualantiket.model.TransactionHeader;
+import com.lawencon.penjualantiket.model.Type;
 import com.lawencon.penjualantiket.model.VoucherTiket;
 
 public interface TransactionDao {
@@ -19,4 +20,5 @@ public interface TransactionDao {
 	abstract HargaTiket findByHarga(int types) throws Exception;
 	abstract VoucherTiket findByVoucher(String pocer) throws Exception;
 	abstract BigInteger findByTotal(int thId) throws Exception;
+	abstract List<TransactionDetail> viewTransaksi() throws Exception;
 }

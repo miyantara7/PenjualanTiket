@@ -58,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 				tDetail.setTypeKendaraan(val.getTypeKendaraan());
 				try {
 					tDetail.setHargaTiket(td_dao.findByHarga(val.getTypeKendaraan().getTypeId()));
-					td_dao.insertTiket(tDetail);
+					td_dao.insertTiket(tDetail);		
 					BigInteger total = td_dao.findByTotal(tDetail.getTransactionHeader().getHeaderId());
 					BigInteger harga = BigInteger.valueOf(tHeader2.getVoucherTiket().getHarga());
 					BigInteger totalSemua = total.subtract(harga);
@@ -118,6 +118,16 @@ public class TransactionServiceImpl implements TransactionService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<TransactionDetail> viewTransaksiHiber(String user, String pass) throws Exception {
+		return th_dao.viewTransaksi();
+	}
+
+	@Override
+	public List<TransactionDetail> viewTransaksiJpa(String user, String pass) throws Exception {
+		return td_dao.viewTransaksi();
 	}
 
 }

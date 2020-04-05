@@ -9,4 +9,6 @@ public interface TransactionService {
 
 	abstract List<TransactionDetail> insertTiketJpa(String pocer, String user, String pass, List<Tiket> tiket) throws Exception;
 	abstract List<TransactionDetail> insertTiketHiber(String pocer, String user, String pass, List<Tiket> tiket) throws Exception;
+	abstract List<TransactionDetail> viewTransaksiHiber(String user, String pass) throws Exception;
+	abstract List<TransactionDetail> viewTransaksiJpa(String user, String pass) throws Exception;
 }
